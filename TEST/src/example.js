@@ -1,1 +1,2 @@
-var test = []
+let test = []
+test.push('1');
