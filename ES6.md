@@ -3,7 +3,9 @@
 目的：学习新特性、学习现代编程语言概念中流行的思想  
 例如：解构赋值、迭代器、作用域
 
-#### 第一章 15page/3day
+---
+
+#### 第一章 15page/2day
 
 **Babel 转码器**  
 功能：ES6 转 ES5  
@@ -92,14 +94,146 @@ const es5Code = require('babel-core').transfrom(es6Code, {
 
 ---
 
-『』
+#### 第二章 15page/1day
+
+目的：了解 let 和 const 与 var 的区别，掌握块级作用域的使用
+
+**『let and const』**  
+作用：提供块级作用域  
+注意：
+
+* 不存在变量提升
+* 暂时性死区（块级作用域中存在 let 或 const，其所声明的变量不再受外部影响）
+* 不能在同一个作用域内重复声明同一个变量
 
 ---
 
-『』
+**『块级作用域』**  
+ES6 能生成块级作用域有：`{}`、`let`、`const`  
+ES5 中只存在全局作用域和函数作用域，并没有块级作用域；这导致很多场景不合理  
+例如：内层变量可能覆盖外层变量；循环变量泄露为全局变量
+
+ES6 允许块级作用域任意嵌套  
+内层作用域可定义外层作用域的同名变量
+
+应用：
+
+```javascript
+// ES5 使用自执行函数(IIFE)生成作用域（函数作用域）
+(function() {
+  var tmp = '...';
+  // ...
+})();
+// ES6 使用{}生成作用域（块级作用域）
+{
+  let tmp = '...';
+  // ...
+}
+```
 
 ---
 
-『』
+**『块级作用域与函数声明』**  
+ES6 明确允许在块级作用域中声明函数  
+但使用环境会导致差异性，尽量使用函数表达式
+
+---
+
+**『const 命令』**  
+const 声明一个只读的常量。一旦声明，常量的值就不能改变  
+本质：保证变量指向的那个内存地址不得改动
+
+```javascript
+const obj = {};
+obj.a = '123'; // 可添加
+obj = {}; // error
+```
+
+冻结对象  
+`Object.freeze()`
+
+---
+
+**『顶级对象』**  
+Node 的 REPL 环境中，顶级对象为 `global`，仅 Node 支持  
+浏览器和 Web Worker 中，`self`也指向顶级对象，但是 Node 不支持  
+通用方法：使用 `this` 变量获取顶级对象，但有局限性
+
+全局环境中 this 返回顶级对象，但在 Node 模块和 ES6 模块则返回当前模块
+
+注意：在浏览器中顶级对象为 window，但`Node`和`Web Worker`没有 window
+
+```javascript
+// REPL环境中定义至全局
+global.a = '123';
+console.log(a); // 123
+
+// 通用方法定义至全局
+this.b = '234';
+console.log(b); // 234
+```
+
+很难找到一种方法可以在所有情况下都能获取到顶级对象，以下两种方法勉强可以使用：
+
+```javascript
+// 方法1
+typeof window !== 'undefined'
+  ? window
+  : typeof process === 'object' &&
+    typeof require === 'function' &&
+    typeof global === 'object'
+    ? global
+    : this;
+
+// 方法2
+var getGlobal = function() {
+  if (typeof self !== 'undefined') {
+    return self;
+  }
+  if (typeof window !== 'undefined') {
+    return window;
+  }
+  if (typeof global !== 'undefined') {
+    return global;
+  }
+  throw new Error('unable to locate global object');
+};
+```
+
+---
+
+#### 第三章 12page/3day
+
+目的：掌握ES6变量的解构赋值  
+
+**『』**
+
+---
+
+**『』**
+
+---
+
+**『』**
+
+---
+
+**『』**
+
+---
+
+**『』**
+
+---
+
+**『』**
+
+---
+
+**『』**
+
+---
+
+**『』**
 
 ---
