@@ -150,7 +150,7 @@ obj = {}; // error
 ```
 
 冻结对象  
-`Object.freeze()`
+`Object.freeze({})`
 
 ---
 
@@ -202,12 +202,235 @@ var getGlobal = function() {
 
 ---
 
-#### 第三章 12page/3day
+#### 第三章 12page/2day
 
-目的：掌握ES6变量的解构赋值  
+目的：掌握 ES6 变量的解构赋值
 
-**『』**
+**『数组解构赋值』**  
+本质为模式匹配，只要等号两边的模式相同，就会被赋予对应的值  
+解构不成功，变量的值就等于 undefined
 
+只要某种数据结构具有 Iterator 接口，都可以采用数组形式的解构赋值
+
+---
+
+**『generator 函数』**  
+简介：generator 函数可以借助 yield 在需要的时候才继续执行剩余的语句，并且传递回一个值  
+作用：实现无回调的异步流程控制  
+使用：调用 generator 函数会返回一个 Iterator 对象  
+Iterator 对象有个`next`方法  
+调用`next`方法时，generator 函数会执行直到遇到 yield 语句，就暂停在那里，并返回一个对象
+
+```javascript
+function* generator() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+var ret = generator(); // 返回一个 Iterator 对象
+var res1 = ret.next(); // 返回一个对象 {value: 1, done: false}
+var res2 = ret.next(); // 返回一个对象 {value: 2, done: false}
+var res3 = ret.next(); // 返回一个对象 {value: 3, done: false}
+```
+
+---
+
+**『对象解构赋值』**
+
+```javascript
+let { x, y, z } = {
+  x: 'x',
+  z: 'z'
+};
+console.log(x); // x
+console.log(y); // undefined
+console.log(z); // z
+```
+
+注意：模式不会被赋值
+
+```javascript
+// 例子1
+let obj = {
+  p: ['aaa', { y: 'bbb' }]
+};
+let { p: [x, { y }] } = obj;
+// p为模式，而不是变量，不会被赋值
+console.log(x); // aaa
+console.log(y); // bbb
+
+// 例子2
+let node = {
+  loc: {
+    start: {
+      line: 1,
+      column: 5
+    }
+  }
+};
+let { loc, loc: { start }, loc: { start: { line } } } = node;
+console.log(loc); // { start: { line: 1, column: 5 } }
+console.log(start); // { line: 1, column: 5 }
+console.log(line); // 1
+
+// 例子3
+let obj = {};
+let arr = [];
+({ foo: obj.prop, bar: arr[0] } = { foo: 123, bar: true });
+console.log(obj); // { prop: 123 }
+console.log(arr); // [ true ]
+
+// 例子4
+// 由于数组本质是特殊的对象，因此可以对数组进行对象属性的解构
+let arr = [1, 2, 3];
+let { 0: first, [arr.length - 1]: last } = arr;
+console.log(first); // 1
+console.log(last); // 3
+```
+
+`()`的作用：  
+JS 引擎会将`{}`理解成一个代码块，从而发生语法错误；  
+使用`()`包裹，不将大括号写在行首，避免 JS 引擎理解为代码块，才能解决语法错误问题
+
+---
+
+**『字符串解构赋值』**
+
+```javascript
+// 将字符串转成一个类数组的对象
+let [a, b, c, d, e] = 'hello';
+console.log(a); // h
+console.log(b); // e
+console.log(c); // l
+console.log(d); // l
+console.log(e); // o
+
+// length为类数组对象的成员
+let { length: len } = 'hello';
+console.log(len); // 5
+```
+
+---
+
+**『数值和布尔值解构赋值』**  
+如果等号右边是数值和布尔值，则会先转为对象
+
+```javascript
+// 数值
+let { toString: s } = 123;
+console.log(s === Number.prototype.toString); // true
+// 布尔值
+let { toString: s } = true;
+console.log(s === Boolean.prototype.toString); // true
+```
+
+解构赋值的规则是，只有等号右边的值不是对象或数组，就先将其转为对象；  
+由于 undefined 和 null 无法转为对象，所以对它们进行解构赋值时都会报错
+
+---
+
+**『函数参数解构赋值』**
+
+```javascript
+// add
+function add([x, y]) {
+  return x + y;
+}
+add([1, 2]); // 3
+
+//
+[1, 2].map((i, v) => {
+  console.log(i, v); // 1, 0  2, 1
+});
+
+//
+[[1, 2], [3, 4]].map(([a, b]) => {
+  console.log(a + b); // 3 7
+});
+```
+
+---
+
+**『默认值』**  
+解构允许设置默认值
+
+```javascript
+// 数组解构设置默认值
+let [x = '1', y] = ['2', '3'];
+console.log(x); // '2'
+console.log(y); // '3'
+
+// 对象解构设置默认值
+let { x, y = 1 } = {};
+console.log(x); // undefined
+console.log(y); // 1
+
+let { x: y = 1 } = { x: 2 };
+console.log(y); // 2
+
+// 函数参数解构设置默认值
+function move({ x = 0, y = 0 } = {}) {
+  console.log(x, y);
+}
+move({ x: 1, y: 2 }); // 1 2
+move({x: 3}); // 3 0
+move(); // 使用默认值{} 0 0
+```
+
+注意：默认值生效条件是对象属性值全等于 undefined
+
+---
+
+**『Map』**  
+任何部署了Iterator接口的对象都可以用for...of循环遍历  
+Map结构原生支持Iterator接口，配合变量的解构赋值获取键名和键值  
+```javascript
+let map = new Map();
+map.set('first', 'Hello');
+map.set('second', 'World');
+console.log(map); // Map { 'first' => 'Hello', 'second' => 'World' }
+for (let [k, v] of map) {
+  console.log(k, v);
+}
+// first Hello
+// second World
+```
+---
+
+**『输入模块的指定方法』**  
+在加载模块时，往往需要指定输入的方法。
+解构赋值作用使得输入语句非常清晰  
+```javascript
+const {module1, module2} = require('Module');
+```
+---
+
+#### 第四章 20page/3day
+
+**『字符串可通过for...of循环遍历』**  
+```javascript
+for (let v of 'hello') {
+  console.log(v);
+}
+```
+---
+
+**『字符串新增方法』**  
+* includes()     返回布尔值，表示是否找到参数字符串
+* startsWith()   返回布尔值，表示参数字符串是否在源字符串的头部
+* endsWith()     返回布尔值，表示参数字符串是否在源字符串的尾部
+
+参数1：参数字符串  
+参数2：开始搜索的位置（可选）  
+
+注意：  
+参数2，endsWith方法与其他方法的行为不同，它针对的是前n个字符，而其他两个方法针对从第n个位置
+```javascript
+let str = 'hello world';
+str.includes('hello', 0); // true
+str.startsWith('hello', 0); // true
+str.endsWith('world', 11); // true
+```
 ---
 
 **『』**
