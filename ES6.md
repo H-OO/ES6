@@ -1,4 +1,4 @@
-### ES6
+## ES6
 
 目的：学习新特性、学习现代编程语言概念中流行的思想  
 例如：解构赋值、迭代器、作用域
@@ -7,7 +7,8 @@
 
 #### 第一章 15page/2day
 
-**Babel 转码器**  
+**Babel 转码器**
+
 功能：ES6 转 ES5  
 目的：学会 Babel 的配置  
 使用：使用配置文件.babelrc，位置一般存在于项目根目录
@@ -22,7 +23,8 @@
 
 ---
 
-**『babel-cli 命令行转码』**  
+**『babel-cli 命令行转码』**
+
 全局或本地安装`babel-cli`  
 相关参数：
 
@@ -35,13 +37,15 @@
 
 ---
 
-**『babel-node 提供支持 ES6 的 REPL 环境』**  
+**『babel-node 提供支持 ES6 的 REPL 环境』**
+
 `babel-node`随`babel-cli`一同安装  
 同样可通过 `package.json` 文件中的 `scripts` 简化命令行操作，直接运行 ES6 文件
 
 ---
 
-**『babel-register 模块改写 require 命令，加上一个钩子』**  
+**『babel-register 模块改写 require 命令，加上一个钩子』**
+
 作用：require 加载后缀为.js/.jsx/.es/.es6 的文件时，先用 Babel 进行转码  
 使用：  
 安装 `npm i babel-register --save-dev`  
@@ -53,7 +57,8 @@
 
 ---
 
-**『babel-core 只有部分代码需要转 ES5 时』**  
+**『babel-core 只有部分代码需要转 ES5 时』**
+
 作用：调用 Babel 的 API 进行转码  
 使用：  
 安装 `npm i babel-core --save-dev`
@@ -67,7 +72,8 @@ const es5Code = require('babel-core').transfrom(es6Code, {
 
 ---
 
-**『babel-polyfill 解决不转换新的 API 问题』**  
+**『babel-polyfill 解决不转换新的 API 问题』**
+
 作用：由于 Babel 默认只转换新的 JS 句法，不转换新的 API  
 例如：Iterator、Generator、Set、Maps、Promise 等全局对象，以及一些定义在全局对象上的方法 Object.assign 都不转码  
 使用：如果想让方法运行，就需使用 `babel-polyfill` 模块  
@@ -76,7 +82,8 @@ const es5Code = require('babel-core').transfrom(es6Code, {
 
 ---
 
-**『ESLint 代码风格检查』**  
+**『ESLint 代码风格检查』**
+
 作用：用于静态检查代码的语法和风格  
 使用：  
 安装 `npm i eslint babel-eslint --save-dev`  
@@ -98,7 +105,8 @@ const es5Code = require('babel-core').transfrom(es6Code, {
 
 目的：了解 let 和 const 与 var 的区别，掌握块级作用域的使用
 
-**『let and const』**  
+**『let and const』**
+
 作用：提供块级作用域  
 注意：
 
@@ -108,7 +116,8 @@ const es5Code = require('babel-core').transfrom(es6Code, {
 
 ---
 
-**『块级作用域』**  
+**『块级作用域』**
+
 ES6 能生成块级作用域有：`{}`、`let`、`const`  
 ES5 中只存在全局作用域和函数作用域，并没有块级作用域；这导致很多场景不合理  
 例如：内层变量可能覆盖外层变量；循环变量泄露为全局变量
@@ -133,13 +142,15 @@ ES6 允许块级作用域任意嵌套
 
 ---
 
-**『块级作用域与函数声明』**  
+**『块级作用域与函数声明』**
+
 ES6 明确允许在块级作用域中声明函数  
 但使用环境会导致差异性，尽量使用函数表达式
 
 ---
 
-**『const 命令』**  
+**『const 命令』**
+
 const 声明一个只读的常量。一旦声明，常量的值就不能改变  
 本质：保证变量指向的那个内存地址不得改动
 
@@ -154,7 +165,8 @@ obj = {}; // error
 
 ---
 
-**『顶级对象』**  
+**『顶级对象』**
+
 Node 的 REPL 环境中，顶级对象为 `global`，仅 Node 支持  
 浏览器和 Web Worker 中，`self`也指向顶级对象，但是 Node 不支持  
 通用方法：使用 `this` 变量获取顶级对象，但有局限性
@@ -206,7 +218,8 @@ var getGlobal = function() {
 
 目的：掌握 ES6 变量的解构赋值
 
-**『数组解构赋值』**  
+**『数组解构赋值』**
+
 本质为模式匹配，只要等号两边的模式相同，就会被赋予对应的值  
 解构不成功，变量的值就等于 undefined
 
@@ -214,7 +227,8 @@ var getGlobal = function() {
 
 ---
 
-**『generator 函数』**  
+**『generator 函数』**
+
 简介：generator 函数可以借助 yield 在需要的时候才继续执行剩余的语句，并且传递回一个值  
 作用：实现无回调的异步流程控制  
 使用：调用 generator 函数会返回一个 Iterator 对象  
@@ -312,7 +326,8 @@ console.log(len); // 5
 
 ---
 
-**『数值和布尔值解构赋值』**  
+**『数值和布尔值解构赋值』**
+
 如果等号右边是数值和布尔值，则会先转为对象
 
 ```javascript
@@ -351,7 +366,8 @@ add([1, 2]); // 3
 
 ---
 
-**『默认值』**  
+**『默认值』**
+
 解构允许设置默认值
 
 ```javascript
@@ -373,7 +389,7 @@ function move({ x = 0, y = 0 } = {}) {
   console.log(x, y);
 }
 move({ x: 1, y: 2 }); // 1 2
-move({x: 3}); // 3 0
+move({ x: 3 }); // 3 0
 move(); // 使用默认值{} 0 0
 ```
 
@@ -381,9 +397,11 @@ move(); // 使用默认值{} 0 0
 
 ---
 
-**『Map』**  
-任何部署了Iterator接口的对象都可以用for...of循环遍历  
-Map结构原生支持Iterator接口，配合变量的解构赋值获取键名和键值  
+**『Map』**
+
+任何部署了 Iterator 接口的对象都可以用 for...of 循环遍历  
+Map 结构原生支持 Iterator 接口，配合变量的解构赋值获取键名和键值
+
 ```javascript
 let map = new Map();
 map.set('first', 'Hello');
@@ -395,54 +413,226 @@ for (let [k, v] of map) {
 // first Hello
 // second World
 ```
+
 ---
 
-**『输入模块的指定方法』**  
-在加载模块时，往往需要指定输入的方法。
-解构赋值作用使得输入语句非常清晰  
+**『输入模块的指定方法』**
+
+在加载模块时，往往需要指定输入的方法。解构赋值作用使得输入语句非常清晰
+
 ```javascript
-const {module1, module2} = require('Module');
+// REPL环境
+// module.js 输出
+module.exports {
+  first: {},
+  second: {}
+}
+// example.js 输入
+const {first, second} = require('Module');
+console.log(first); // {}
 ```
+
 ---
 
-#### 第四章 20page/3day
+#### 第四章 20page/1day ★☆
 
-**『字符串可通过for...of循环遍历』**  
+**『字符串可通过 for...of 循环遍历』**
+
 ```javascript
 for (let v of 'hello') {
   console.log(v);
 }
 ```
+
 ---
 
-**『字符串新增方法』**  
-* includes()     返回布尔值，表示是否找到参数字符串
-* startsWith()   返回布尔值，表示参数字符串是否在源字符串的头部
-* endsWith()     返回布尔值，表示参数字符串是否在源字符串的尾部
+**『字符串新增方法』**
 
-参数1：参数字符串  
-参数2：开始搜索的位置（可选）  
+* includes() 返回布尔值，表示是否找到参数字符串
+* startsWith() 返回布尔值，表示参数字符串是否在源字符串的头部
+* endsWith() 返回布尔值，表示参数字符串是否在源字符串的尾部
+
+参数 1：参数字符串  
+参数 2：开始搜索的位置（可选）
 
 注意：  
-参数2，endsWith方法与其他方法的行为不同，它针对的是前n个字符，而其他两个方法针对从第n个位置
+参数 2，endsWith 方法与其他方法的行为不同，它针对的是前 n 个字符，而其他两个方法针对从第 n 个位置
+
 ```javascript
 let str = 'hello world';
 str.includes('hello', 0); // true
 str.startsWith('hello', 0); // true
 str.endsWith('world', 11); // true
 ```
+
+* repeat() 返回新字符串，表示将源字符串重复 n 次
+* padStart() 字符串长度补全，头部补全
+* padEnd() 字符串长度补全，尾部补全
+
+```javascript
+'x'.repeat(3); // xxx
+
+'x'.padStart(5, 'abc'); // abcax
+'x'.padEnd(5, 'abc'); // xabca
+'x'.padStart(5); // '     x'
+'x'.padEnd(5); // 'x     '
+'12'.padStart(10, 'YYYY-MM-DD'); // YYYY-MM-12 字符串格式提醒
+```
+
 ---
 
-**『』**
+**『模板字符串』**
+
+用反引号 ` 标识，可作为普通字符串使用，也可以定义多行字符串，或在字符串中嵌入变量
+
+```javascript
+// 字符串中嵌入变量
+// 语法：`${}`
+
+// 例子1
+let data = { x: 1, y: 2 };
+let str = `${data.x + data.y}`;
+console.log(str); // 3
+
+// 例子2
+function fn() {
+  return 'Hello world';
+}
+console.log(`${fn()}`); // Hello world
+
+// 例子3
+let str = 'Hello';
+console.log(`${str} World`); // Hello World
+
+// 例子4
+let str = 'return ' + '`${name}`';
+const fn = new Function('name', str);
+console.log(fn('xxx')); // xxx
+
+// 例子5
+var a = 5;
+var b = 10;
+tag`A ${a + b} B ${a * b}`;
+function tag(s, v1, v2) {
+  console.log(s); // [ 'A ', ' B ', '' ]
+  console.log(v1); // 15
+  console.log(v2); // 50
+}
+
+// 例子6
+var total = 30;
+var msg1 = passthru`The total is ${total} (${total * 1.05} with tax)`;
+var msg2 = `The total is ${total} (${total * 1.05} with tax)`;
+function passthru(literals) {
+  // literals  [ 'The total is ', ' (', ' with tax)' ]
+  // arguments  { '0': [ 'The total is ', ' (', ' with tax)' ], '1': 30, '2': 31.5 }
+  var result = '';
+  var i = 0;
+  while (i < literals.length) {
+    result += literals[i++];
+    if (i < arguments.length) {
+      result += arguments[i]; // 30  31.5
+    }
+  }
+  return result;
+}
+console.log(msg1); // The total is 30 (31.5 with tax)
+console.log(msg2); // The total is 30 (31.5 with tax)
+```
+
+标签模板的一个重要应用就是过滤 HTML 字符串，防止用户输入恶意内容
+
+```javascript
+var sender = 'xxx';
+var msg = saferHTML`<p>${sender} has sent you a message</p>`;
+function saferHTML(tmpData) {
+  console.log(tmpData); // [ '<p>', ' has sent you a message</p>' ]
+  console.log(arguments); // { '0': [ '<p>', ' has sent you a message</p>' ], '1': 'xxx' }
+}
+```
 
 ---
 
-**『』**
+#### 第五章 13page/2day
+
+**『RegExp 构造函数』**
+
+在 ES5 中，RegExp 构造函数的参数有两种情况：  
+a.参数 1 是字符串，参数 2 是正则表达式修饰符
+
+```javascript
+// a
+var regexp = new RegExp('xyz', 'i');
+// 等价于
+var regexp = /xyz/i;
+```
+
+b.参数是正则表达式，返回该正则表达式
+
+```javascript
+// b
+var regexp = new RegExp(/xyz/i);
+// 等价于
+var regexp = /xyz/i;
+```
+
+注意：ES5 中不允许此时 b 使用第二个参数添加修饰符，否则会报错
+
+```javascript
+// b
+var regexp = new RegExp(/xyz/, 'i'); // error
+```
+
+ES6 改变了这种行为：  
+如果 RegExp 构造函数第一个参数是一个正则对象，  
+那么可以使用第二个参数指定修饰符，  
+而且返回的正则表达式会忽略原有的正则表达式的修饰符，只用新指定的修饰符
+
+```javascript
+var regexp = new RegExp(/xzy/gi, 'i'); // /xzy/i
+```
+
+正则表达式使用：
+
+```javascript
+/a/.test('abc') // true
+/^a/.test('abc') // true
+/c$/.test('abc') // true
+/^a|c$/.test('abc') // true
+/b$/.test('abc') // false
+```
 
 ---
 
-**『』**
+**『字符串的正则方法』**
 
+字符串对象共有 4 种方法使用正则表达式
+
+* match() 返回一个数组，0 为匹配到的字符，1 为字符所在的下标，2 为整体字符串
+* replace() 替换字符串中与正则表达式匹配的字符
+* search() 检索字符串中与正则表达式匹配的字符下标
+* split() 字符串转换成数组
+
+```javascript
+let str = 'abc';
+str.match(/b/); // [ 'b', index: 1, input: 'abc' ]
+str.replace(/b/, 'x'); // axc
+str.search(/b/); // 1
+str.split(/b/); // ['a', 'c']
+```
+
+---
+
+**『正则表达式修饰符』**
+
+u 修饰符 含义为 Unicode 模式，用来正确处理大于\uFFFF 的 Unicode 字符。  
+        也就是说，可以正确处理 4 个字节的 UTF-16 编码
+
+i 修饰符 含义为字母忽略大小写
+
+y 修饰符 含义全局匹配
+
+.字符
 ---
 
 **『』**

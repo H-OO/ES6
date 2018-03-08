@@ -1,114 +1,36 @@
-// let obj = {
-//   p: [
-//     'hello',
-//     {y: 'World'}
-//   ]
-// }
-
-// let {p: [x, {y}]} = obj
-// console.log(x);
-
-// let {x, y} = {
-//   x: 'aaa'
-// }
-// console.log(x);
-
-// let obj = {
-//   p: ['aaa', {y: 'bbb'}]
-// }
-// let {p: [x, {y}]} = obj
-
-// console.log(x);
-// console.log(y);
-
-// let node = {
-//   loc: {
-//     start: {
-//       line: 1,
-//       column: 5
+// var total = 30;
+// var msg1 = passthru`The total is ${total} (${total*1.05} with tax)`;
+// var msg2 = `The total is ${total} (${total*1.05} with tax)`;
+// function passthru(literals) {
+//   // literals  [ 'The total is ', ' (', ' with tax)' ]
+//   // arguments  { '0': [ 'The total is ', ' (', ' with tax)' ], '1': 30, '2': 31.5 }
+//   var result = '';
+//   var i = 0;
+//   while (i < literals.length) {
+//     result += literals[i++];
+//     if (i < arguments.length) {
+//       result += arguments[i]; // 30  31.5
 //     }
 //   }
-// };
-
-// let { loc, loc: { start }, loc: { start: { line } } } = node;
-
-// console.log(loc); // { start: { line: 1, column: 5 } }
-// console.log(start); // { line: 1, column: 5 }
-// console.log(line); // 1
-
-// let obj = {};
-// let arr = [];
-
-// ({foo: obj.prop, bar: arr[0]} = {foo: 123, bar: true});
-
-// console.log(obj); // { prop: 123 }
-// console.log(arr); // [ true ]
-
-// let {x, y = 1} = {};
-// console.log(x); // undefined
-// console.log(y); // 1
-
-// let {x: y = 1} = {x: 2};
-// console.log(y); // 2
-
-// let arr = [1, 2, 3];
-// let {0: first, [arr.length - 1]: last} = arr;
-// console.log(first); // 1
-// console.log(last); // 3
-
-// let {length: len} = 'hello';
-// console.log(len); // 5
-
-// // 数值
-// let { toString: s } = 123;
-// console.log(s === Number.prototype.toString); // true
-// // 布尔值
-// let { toString: s } = true;
-// console.log(s === Boolean.prototype.toString); // true
-
-// [[1, 2], [3, 4]].map(([a, b]) => {
-//   console.log(a + b);
-// });
-// [1, 2].map((i, v) => {
-//   console.log(i, v);
-// });
-
-// function move({x = 0, y = 0} = {}) {
-//   console.log(x, y);
+//   return result;
 // }
-// move({x: 1, y: 2}); // 1 2
-// move({x: 3}) //
-// move(); // 使用默认值{} 0 0
+// console.log(msg1); // The total is 30 (31.5 with tax)
+// console.log(msg2); // The total is 30 (31.5 with tax)
 
-// let x = 1;
-// let y = 2;
-// console.log([x, y] = [y, x]);
-
-// let map = new Map();
-// map.set('first', 'hello');
-// map.set('second', 'world');
-
-// for (let [k, v] of map) {
-//   console.log(v);
-
+// var sender = 'xxx';
+// var msg = saferHTML`<p>${sender} has sent you a message</p>`;
+// function saferHTML(tmpData) {
+//   console.log(tmpData); // [ '<p>', ' has sent you a message</p>' ]
+//   console.log(arguments); // { '0': [ '<p>', ' has sent you a message</p>' ], '1': 'xxx' }
 // }
 
-// let map = new Map();
-// map.set('first', 'Hello');
-// map.set('second', 'World');
-// console.log(map);
+// var regexp = new RegExp(/xzy/ig, 'i');
+// console.log(regexp);
 
-// for (let [k] of map) {
-//   console.log(k);
-// }
-// // first Hello
-// // second World
+// let str = 'abc';
+// var res = str.split(/b/);
+// console.log(res);
 
-// for (let [i, v] of 'hello') {
-//   console.log(i, v);
-  
-// }
-
-// let str = 'hello world';
-// console.log(str.endsWith('world', 10)); // true
+console.log(/A/.test('abc'));
+console.log(/a/.test('abc'));
 
