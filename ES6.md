@@ -689,7 +689,7 @@ str.split(/b/); // ['a', 'c']
 
 #### 第六章 16page/3day
 
-**『』**
+**『Numberkuo』**
 
 ---
 
