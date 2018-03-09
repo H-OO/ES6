@@ -75,5 +75,4 @@
 // console.log(s.split(r));
 
 
-Object.defineProperty()
-
+// Object.defineProperty()
