@@ -1,6 +1,3 @@
-// module.exports = {
-//   sayName: function (name) {
-//     console.log(name);
-//   },
-//   sayHi: {}
-// };
+const a = () => {}
+
+module.exports = a;
