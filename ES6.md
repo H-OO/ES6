@@ -685,6 +685,16 @@ str.split(/b/); // ['a', 'c']
 
 * flags 返回正则表达式的修饰符
 
+```javascript
+var str = '123[哈哈]123[嘻嘻]123';
+var regex = /\[.{1,3}\]/g;
+var res = str.match(regex);
+console.log(res); // ['[哈哈]', '[嘻嘻]']
+for (var i = 0, l = res.length; i < l; i++) {
+  str = str.replace(regex, '$');
+}
+console.log(str); // 123$123$123
+```
 ---
 
 #### 第六章 16page/1day
@@ -797,7 +807,45 @@ var getObj = id => ({});
 
 **『Promise对象』**
 
+是异步编程的一种解决方案；then方法指定的回调函数将在当前脚本所有同步任务执行完成后才会执行
 
+Promise对象代表一个异步操作，有3种状态：Pending（进行中），Fulfilled（已成功），Rejected（已失败）  
+只有异步操作的结果可以决定当前是哪一种状态，任何其他操作都无法改变这个状态；一旦状态改变就不会再变  
+状态改变只有两种可能：一种是Pending变为Fulfilled，另一种是Pending变为Rejected  
+只要这两种情况发生，状态就凝固了，不会再变，这时就成为Resolved（已定型）
+
+Promise构造函数接收一个函数作为参数，该函数的两个参数分别是resolve（表示成功）和reject（表示失败）  
+它们是两个函数，由JS引擎提供，不用自己部署  
+resolve函数的作用：将Promise对象的状态从Pending变为Fulfilled；将异步操作的结果作为参数传递出去  
+reject函数的作用：将Promise对象的状态从Pending变成Reject；将异步操作报出的错误作为参数传递出去
+
+Promise实例生成之后，then方法分别指定Fulfilled状态和Reject状态的回调函数  
+根据状态只执行其中一个回调函数，传递出结果    
+
+```javascript
+// 模拟状态 200代表成功
+const state = 200;
+// 成功
+const successData = '成功...';
+// 失败
+const errorData = '失败...';
+
+// Promise对象
+const promise = new Promise(function (resolve, reject) {
+  // ...
+  if (state === 200) {
+    resolve(successData); // 异步获取数据成功，输出结果
+  } else {
+    reject(errorData); // 异步获取数据失败，输出结果
+  }
+})
+// 执行回调获取结果
+promise.then(function(success) {
+  // success
+}, function(error) {
+  // error
+});
+```
 ---
 
 **『』**
