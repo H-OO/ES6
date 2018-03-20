@@ -846,6 +846,20 @@ promise.then(function(success) {
   // error
 });
 ```
+
+.catch方法用来捕获Promise在resolve语句后面抛出的错误  
+Promise对象的错误具有"冒泡"性质，会一直向后传递，直到被捕获为止  
+也就是说，错误总是会被下一个catch语句捕获
+
+所以最正确的使用方式为：
+```javascript
+promise.then(function(success) {
+  // success..
+}).catch(function(err) {
+  // error..
+})
+```
+
 ---
 
 **『』**
